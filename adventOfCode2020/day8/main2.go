@@ -16,13 +16,17 @@ func main() {
 
 	jmpOrNop := make(map[int]bool)
 
+	// Register all the JMP or NOP operations
 	for i, command := range commands {
 		if command.Operation == "nop" || command.Operation == "jmp" {
 			jmpOrNop[i] = true
 		}
 	}
 
+	// For each JMP or NOP operation, switch it, and execute iteration
 	for k := range jmpOrNop {
+		// I switch the command two times to leave it as is
+		// No copies of the array neither deep clones
 		switchCommand(&commands[k])
 		hasPassed, v := executeIteration(commands)
 		switchCommand(&commands[k])
